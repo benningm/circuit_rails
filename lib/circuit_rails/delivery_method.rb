@@ -18,10 +18,7 @@ module CircuitRails
     end
 
     def client
-      [:client_id, :client_secret].each do |param|
-        raise MissingParameter, "no #{param} configured for circuit delivery!" if settings[param].nil?
-      end
-      CircuitClient::Client.new do |c|
+      @client ||= CircuitClient::Client.new do |c|
         c.host = settings[:host]
         c.client_id = settings[:client_id]
         c.client_secret = settings[:client_secret]

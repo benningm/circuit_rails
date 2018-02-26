@@ -35,12 +35,8 @@ Or create a base class for circuit mailers:
 ```ruby
 # apps/mailers/circuit_mailer.rb
 class CircuitMailer < ApplicationMailer
-  default default_conversation: '<your default conversation>'
-
-  def mail(headers = {}, &block)
-    headers[:delivery_method] = :circuit
-    super
-  end
+  self.delivery_method = :circuit
+  # default conversation: '<your default conversation>'
 end
 ```
 
@@ -50,7 +46,7 @@ Then use this class in your mailers:
 # apps/mailers/hello_world_mailer.rb
 class HelloWorldMailer < CircuitMailer
   def hello_world
-    mail(subject: 'Hello World!')
+    mail(subject: 'Hello World!', conversation: '<convId>')
   end
 end
 ```

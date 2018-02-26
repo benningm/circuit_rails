@@ -1,7 +1,12 @@
 
 module Mail
   class Message
-    attr_accessor :conversation
+    def conversation( val = nil )
+      default :conversation, val
+    end
+    def conversation=( val )
+      header[:conversation] = val
+    end
   end
 end
 
