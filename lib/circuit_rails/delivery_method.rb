@@ -7,14 +7,15 @@ module CircuitRails
     attr_accessor :settings
 
     DEFAULTS = {
-      :host => 'eu.yourcircuit.com',
-      :client_id => nil,
-      :client_secret => nil,
-      :default_conversation => nil,
+      host: 'eu.yourcircuit.com',
+      client_id: nil,
+      client_secret: nil,
+      auth_scope: 'ALL',
+      default_conversation: nil
     }
 
     def initialize(values)
-     self.settings = DEFAULTS.merge(values)
+      self.settings = DEFAULTS.merge(values)
     end
 
     def client
@@ -22,12 +23,13 @@ module CircuitRails
         c.host = settings[:host]
         c.client_id = settings[:client_id]
         c.client_secret = settings[:client_secret]
+        c.auth_scope = settings[:auth_scope]
       end
     end
 
     def deliver!(mail)
       conv = mail.conversation || settings[:default_conversation]
-      raise MissingParameter, "a conversation or default_conversation is required for circuit delivery!" if conv.nil?
+      raise MissingParameter, 'a conversation or default_conversation is required for circuit delivery!' if conv.nil?
       body = mail.multipart? ? mail.text_part.body.decoded : mail.body.decoded
       options = {}
       options[:subject] = mail.subject unless mail.subject.nil?
