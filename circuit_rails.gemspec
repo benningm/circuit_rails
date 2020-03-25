@@ -1,7 +1,7 @@
 # Ensure we require the local version and not one we might have installed already
 spec = Gem::Specification.new do |s| 
   s.name = 'circuit_rails'
-  s.version = '0.0.2'
+  s.version = '1.0.0'
   s.author = 'Markus Benning'
   s.email = 'ich@markusbenning.de'
   s.homepage = 'https://github.com/benningm/circuit_rails'
@@ -12,6 +12,5 @@ spec = Gem::Specification.new do |s|
   s.require_paths << 'lib'
   s.add_development_dependency('rake', '~> 12')
   s.add_development_dependency('rdoc', '~> 6')
-  s.add_development_dependency('aruba', '~> 0')
-  s.add_runtime_dependency('circuit_client', '~> 0')
+  s.add_runtime_dependency('circuit_client', '~> 1')
 end
